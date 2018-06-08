@@ -58,6 +58,12 @@ io.on('connection', socket => {
 		const res = await socketUserHandler.addFriend(data)
 		if (res.code !== 0) io.to(socketId).emit('receiveServiceError', res)
 	})
+
+	// 添加好友
+	socket.on('sendMessage', async data => {
+		const toUser = await socketUserHandler.sendMessage(data)
+		if (toUser.socketId) io.to(toUser.socketId).emit('receiveMessage', data)
+	})
 })
 
 

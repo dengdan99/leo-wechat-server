@@ -132,3 +132,7 @@ exports.addFriend = async (data) => {
   }
 }
 
+exports.sendMessage = async (msg) => {
+  let toUser = await userServer.findOneByNickname(msg.to)
+  return toUser
+}
